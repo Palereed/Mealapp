@@ -32,8 +32,6 @@
         if (response.errno === ERR_OK) {
           this.seller = response.data;
           }
-      }, response => {
-    
       });
     },
     components: { 
@@ -50,6 +48,7 @@
       width: 100%
       height: 40px
       line-height: 40px
+      background: #fff
       border-1px(rgba(7, 17, 27, 0.1))
       .tab-item
         flex: 1 //子元素都有相同的长度
