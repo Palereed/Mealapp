@@ -34,13 +34,14 @@
     		</li>
     	</ul>
     </div>
+    <shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
   </div>
 </template>
 
 <!-- <script type="text/ecmascript-6"> -->
 <script>
   import BScroll from 'better-scroll';
-
+  import shopcart from '@/components/shopcart/shopcart';
   const ERR_OK = 0
 
   export default {
@@ -56,6 +57,9 @@
 				scrollY: 0,
       };
 		},
+    components: {
+      shopcart
+    },
 		computed :{
 			currentIndex (){
 				for (let i=0; i< this.listHeight.length; i++){
@@ -86,7 +90,7 @@
       selectMenu (index){
         let foodList = this.$refs.foodList;
         let element = foodList[index];
-        this.foodsScroll.scrollToElement(element,300)
+        this.foodsScroll.scrollToElement(element, 300)
       },
 			_initScroll() {
 			  this.menuScroll = new BScroll(this.$refs.menuWrapper, {
