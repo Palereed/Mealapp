@@ -15,7 +15,7 @@
 				<div class="description">另需要配送费￥{{deliveryPrice}}元</div>
 			</div>
 			<div class="content-right">
-				<div class="pay" :class="{'enough':totalPrice>=minPrice}">{{payDesc}}</div>
+				<div class="pay" :class="{'enough':isEnough}">{{payDesc}}</div>
 			</div>
 		</div>
 	</div>
@@ -23,6 +23,7 @@
 
 <!-- <script type="text/ecmascript-6"> -->
 <script>
+   import cartcontrol from "@/components/cartcontrol/cartcontrol"
    export default {
    	props: {
    		selectFoods :{
@@ -69,9 +70,18 @@
 				} else {
 					return '结算'
 				}
-			}
-			
-		}
+			},
+      isEnough (){
+        if (this.totalPrice >= this.minPrice) {
+          return true 
+        } else {
+          return false
+        }
+      }
+		},
+    components:{
+      cartcontrol
+    }
    }
 </script>
 
