@@ -1,8 +1,11 @@
 <template>
 	<div class="cartcontrol">
-		<div class="cart-decrease icon-remove_circle_outline" v-show="food.count > 0"></div>
-		<div class="count" v-show="food.count > 0">{{food.count}}</div>
-		<div class="cart-increase icon-add_circle" @click="increaseCart"></div>
+    <transition name="translate">
+  		<div class="cart-decrease icon-remove_circle_outline" v-show="food.count > 0" @click="decreaseCart">
+      </div>
+    </transition>
+    <div class="count" v-show="food.count > 0">{{food.count}}</div>
+    <div class="cart-increase icon-add_circle" @click="increaseCart"></div>
 	</div>
 </template>
 <script>
@@ -20,6 +23,12 @@
      		} else {
       	  this.food.count ++
       	}
+        this.$emit('add', event.target);
+      },
+      decreaseCart () {
+        if ( this.food.count ) {
+          this.food.count --
+        }
       }
     }
 	}
@@ -28,13 +37,20 @@
 <style lang="stylus" rel="stylesheet/stylus">
   .cartcontrol
     font-size: 0
-    .cart-decrease,.cart-increase
+    .cart-decrease
       display: inline-block
       padding: 6px
+      vertical-align: top
       line-height: 24px
       font-size: 24px
       color: rgb(0, 160, 220)
-    .count
+      transform: translateX(0) rotate(0)
+      &.translate-enter-active, &.translate-leave-active
+        transition: all 0.2s linear
+      &.translate-enter, &.translate-leave-to
+        opacity: 0
+        transform: translateX(24px) rotate(180deg)
+     .count
       display: inline-block
       vertical-align: top
       padding-top: 6px
@@ -43,4 +59,11 @@
       text-align: center
       font-size: 10px
       color: rgb(147, 153, 159)
+    .cart-increase
+      display: inline-block
+      vertical-align: top
+      padding: 6px
+      line-height: 24px
+      font-size: 24px
+      color: rgb(0, 160, 220)  
 </style>
