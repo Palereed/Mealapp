@@ -16,7 +16,7 @@
   				<div class="description">另需要配送费￥{{deliveryPrice}}元</div>
   			</div>
   			<div class="content-right">
-  				<div class="pay" :class="{'enough':isEnough}">{{payDesc}}</div>
+  				<div class="pay" :class="{'enough':isEnough}" @click.stop.prevent="pay">{{payDesc}}</div>
   			</div>
       </div>
       <div class="ball-container">
@@ -42,17 +42,18 @@
                   ￥{{food.price*food.count}}
                 </div>
                 <div class="cart-wrapper">
-                    <cartcontrol :food="food"></cartcontrol>
+                    <cartcontrol :food="food" @add="addFood"></cartcontrol>
                 </div>
               </li>
             </ul>
-          </div>
+            </div>
         </div>
       </transition>
   	</div>
-    <div class="listmisk" v-show="listShow">
-      
-    </div>
+    <transition name="misk">
+      <div class="listmisk" v-show="listShow" @click="hide">
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -215,6 +216,22 @@
         this.selectFoods.forEach( (food) => {
           food.count = 0
         })
+      },
+      hide (){
+        this.fold = true
+      },
+      pay () {
+        if( this.totalPrice < this.minPrice) {
+          return
+        } else {
+          
+          window.confirm(`是否支付${this.totalPrice}元？`)
+        }
+      },
+      addFood(target) {
+        this.$nextTick(() => {
+          this.drop(target);
+        })
       }
     }
 }
@@ -356,8 +373,8 @@
         li
           position: relative
           padding: 12px 0
-          line-height: 24px
           box-sizing: border-box
+          line-height: 24px
           border-1px(rgba(7, 17, 27, 0.1)) 
           font-size: 14px
           .name
@@ -374,10 +391,15 @@
             right: 0
             top: 6px
   .listmisk
-    positon: fixed
+    position: fixed
     top: 0
     left: 0
     width: 100%
     height: 100%
+    background:rgba(7, 17, 27, 0.6)
     z-index: 45
+    &.misk-enter-active, &.misk-leave-active
+      transition: all 0.5s
+    &.misk-enter, &.misk-leave-to
+      opacity: 0
 </style>

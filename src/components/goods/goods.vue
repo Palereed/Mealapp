@@ -14,7 +14,7 @@
     		<li v-for="item in goods" class="food-list" ref="foodList">
     			<h1 class="title">{{item.name}}</h1>
     			<ul>
-	    			<li v-for="food in item.foods" class="food-item border-1px">
+	    			<li v-for="food in item.foods" @click="selectFood(food)" class="food-item border-1px" >
 	    				<div class="icon">
 	    					<img :src="food.icon" width="57" height="57">
 	    				</div>
@@ -38,6 +38,7 @@
     	</ul>
     </div>
     <shopcart ref="shopcart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
+    <food @add="addFood" :food="selectedFood" ref="food"></food>
   </div>
 </template>
 
@@ -45,6 +46,7 @@
 <script>
   import BScroll from 'better-scroll';
   import shopcart from '@/components/shopcart/shopcart';
+  import food from '@/components/food/food';
   import cartcontrol from '@/components/cartcontrol/cartcontrol'
   const ERR_OK = 0
 
@@ -59,11 +61,13 @@
 				goods : [],
 				listHeight: [],
 				scrollY: 0,
+        selectedFood: {}
       };
 		},
     components: {
       shopcart,
-      cartcontrol
+      cartcontrol,
+      food
     },
 		computed :{
 			currentIndex (){
@@ -103,6 +107,11 @@
 			})
 		},
 		methods: {
+      selectFood (food) {
+        this.selectedFood = food
+        this.$refs.food.ifshow();
+        this.$refs.food.foodScroll();
+      },
       selectMenu (index){
         let foodList = this.$refs.foodList;
         let element = foodList[index];
