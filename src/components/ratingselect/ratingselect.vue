@@ -2,8 +2,8 @@
   <div class="ratingselect">
     <div class="rating-type">
      <span @click="select(2)" class="block positive" :class="{'active':selectType === 2}">{{desc.all}}<span class="count">{{ratings.length}}</span></span>
-      <span @click="select(1)" class="block positive" :class="{'active':selectType === 1}">{{desc.positive}}<span class="count">{{positives.length}}</span></span>
-      <span @click="select(0)" class="block negative" :class="{'active':selectType === 0}">{{desc.negative}}<span class="count">{{negatives.length}}</span></span>
+      <span @click="select(0)" class="block positive" :class="{'active':selectType === 0}">{{desc.positive}}<span class="count">{{positives.length}}</span></span>
+      <span @click="select(1)" class="block negative" :class="{'active':selectType === 1}">{{desc.negative}}<span class="count">{{negatives.length}}</span></span>
     </div>
     <div @click="toggleConent" class="switch" :class="{'active':onlyContent === true}">
       <span class="icon-check_circle"></span>
@@ -14,8 +14,8 @@
 <!-- <script type="text/ecmascript-6"> -->
 <script>
 	const ALL = 2;
-  const POSITIVE = 1;
-  const NEGATIVE = 0;
+  const NEGATIVE = 1;
+  const POSITIVE = 0;
   export default{
   	props:{
   		ratings: {
@@ -57,12 +57,10 @@
   	},
   	methods:{
   		select (type) {
-  			this.selectType = type
   			this.$emit('select', type);
   		},
   		toggleConent (){
-  			this.onlyContent = !this.onlyContent
-  			this.$emit('toggle', onlyContent);
+  			this.$emit('toggle');
   		}
   	}
   }
