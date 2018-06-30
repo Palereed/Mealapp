@@ -9,7 +9,7 @@ Vue.use(VueRouter);
 
 let routes = [
   {
-    path: '/', component: goods,
+    path: '/', redirect: '/goods'
   },
   {
     path: '/goods', component: goods,

@@ -1,23 +1,23 @@
 <template>
   <div>
-  	<div class="shopcart">
-  		<div class="content" @click="toggleList">
-  			<div class="content-left">
-  				<div class="logo-wrapper">
-  					<div class="logo" :class="{'active':totalCount > 0}">
-  						<i class="icon-shopping_cart" :class="{'active':totalCount > 0}"></i>
-  					</div>
-  					<div class="num" v-show="totalCount > 0">
-  						{{totalCount}}
-  					</div>
-  				</div>
-  				<div class="price" :class="{'active':totalPrice > 0}">￥{{totalPrice}}</div>
-  				<div class="line"></div>
-  				<div class="description">另需要配送费￥{{deliveryPrice}}元</div>
-  			</div>
-  			<div class="content-right">
-  				<div class="pay" :class="{'enough':isEnough}" @click.stop.prevent="pay">{{payDesc}}</div>
-  			</div>
+    <div class="shopcart">
+      <div class="content" @click="toggleList">
+        <div class="content-left">
+          <div class="logo-wrapper">
+            <div class="logo" :class="{'active':totalCount > 0}">
+              <i class="icon-shopping_cart" :class="{'active':totalCount > 0}"></i>
+            </div>
+            <div class="num" v-show="totalCount > 0">
+              {{totalCount}}
+            </div>
+          </div>
+          <div class="price" :class="{'active':totalPrice > 0}">￥{{totalPrice}}</div>
+          <div class="line"></div>
+          <div class="description">另需要配送费￥{{deliveryPrice}}元</div>
+        </div>
+        <div class="content-right">
+          <div class="pay" :class="{'enough':isEnough}" @click.stop.prevent="pay">{{payDesc}}</div>
+        </div>
       </div>
       <div class="ball-container">
         <div v-for="ball in balls">

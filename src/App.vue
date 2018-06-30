@@ -12,26 +12,34 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view :seller="seller"></router-view>
+    <keep-alive>
+     <router-view :seller="seller"></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <!-- <script type="text/ecmascript-6"> -->
 <script>
-  import header from '@/components/header/header';
+  import header from '@/components/header/header'
+  import {urlParse} from '@/common/js/util'
   const ERR_OK = 0;
   export default {
     data() {
       return {
-        seller:{ }
+        seller:{
+          id: (() => {
+            let queryParm = urlParse()
+            return queryParm.id
+          })()
+        }
       };
     },
     created() {
-      this.$http.get('/api/seller').then(response => {
+      this.$http.get('/api/seller?id=' + this.seller.id).then(response => {
         response = response.body;
         if (response.errno === ERR_OK) {
-          this.seller = response.data;
-          }
+          this.seller = Object.assign({}, this.seller, response.data);
+        }
       });
     },
     components: { 
