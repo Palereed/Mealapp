@@ -252,6 +252,7 @@
         color: rgb(7, 17, 27)
         font-size: 14px
       .pic-wrapper
+        position: relative
         width: 100%
         overflow: hidden
         background-repeat: no-repeat

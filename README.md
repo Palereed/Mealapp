@@ -1,5 +1,5 @@
-# Mealapp
-一个仿饿了么的Webapp项目，用来学习Vue。
+# vue-meal-spa
+一个仿饿了么单页面的Webapp项目，用来学习Vue。
 
 ## 笔记
 项目笔记在项目过程中逐步完善。

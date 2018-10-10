@@ -46,7 +46,7 @@
                 </div>
               </li>
             </ul>
-            </div>
+          </div>
         </div>
       </transition>
   	</div>
@@ -365,6 +365,7 @@
           font-size: 12px
           float: right
       .list-content
+        position: relative  
         background: #fff
         padding: 0 18px
         max-height: 217px
